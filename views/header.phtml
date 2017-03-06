@@ -4,7 +4,7 @@
 	<h2>Je recherche</h2>
 	<form method="GET">
 		<input type="hidden" value="search" name="page">
-		<input type="text" class="search-input" name="search" id="search_input" placeholder="Que recherchez-vous ?" value="un titre, un auteur"/>
+		<input type="text" class="search-input" name="search" id="search_input" placeholder="Que recherchez-vous ?" value="<?=htmlentities($search)?>"/>
 		<input type="submit" class="search-button" value="Rechercher">
 	</form>
 

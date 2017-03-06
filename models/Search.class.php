@@ -12,7 +12,7 @@ class Search
 	private $price;
 
 	private $db;
-	private $book;
+	private $books;
 
 	public function __construct($db)
 	{
