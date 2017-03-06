@@ -9,10 +9,10 @@ $errors = [];
 // {
 // 	$errors[] = $exception->getMessage();
 // }
-$db = mysqli_connect("192.168.1.52", "e-commerce", "e-commerce", "e-commerce");
+$db = mysqli_connect("192.168.1.95", "recherche", "recherche", "recherche");
 session_start();// http://php.net/manual/fr/function.session-start.php
-$access = ["errors","items"];
-$page = "items";
+$access = ["errors","search"];
+$page = "search";
 if (isset($_GET['page']) && in_array($_GET['page'], $access)) // http://php.net/manual/fr/function.in-array.php
 {
     $page = $_GET['page'];
@@ -24,12 +24,12 @@ function __autoload($classname)
 	require('models/'.$classname.'.class.php');
 }
 
-$access_traitement = ["login"=>"users"]; // comments
+// $access_traitement = ["login"=>"users"]; // comments
 
-if (isset($_GET['page'], $access_traitement[$_GET['page']]))
-{
-	$traitement = $access_traitement[$_GET['page']];
-	require('apps/traitement_'.$traitement.'.php');
-}
+// if (isset($_GET['page'], $access_traitement[$_GET['page']]))
+// {
+// 	$traitement = $access_traitement[$_GET['page']];
+// 	require('apps/traitement_'.$traitement.'.php');
+// }
 require('apps/skel.php');
 ?>
