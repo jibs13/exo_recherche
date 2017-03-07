@@ -20,7 +20,7 @@ class BookManager
 		return $list;
 	}
 
-	public function search($name, $author, $country, $gender, $year, $editorial, $isbn, $price )
+	public function search($name, $author, $country, $gender, $year, $editorial, $isbn, $price)
 	{
 		$request = "SELECT * FROM books WHERE name LIKE '%".$name."%' ORDER BY name DESC";
 		if($name != "")
