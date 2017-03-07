@@ -1,5 +1,5 @@
 <?php
-class SearchManager
+class BookManager
 {
 	private $db;
 	public function __construct($db)
