@@ -22,26 +22,13 @@ class BookManager
 	{
 		$list = [];
 		$res = mysqli_query($this->db, "SELECT * FROM books ORDER BY id LIMIT 15");
-		while ($book = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
+		while ($books = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
 		{
-			$list[] = $book;
+			$list[] = $books;
 		}
 		return $list;
 	}
-	public function findById($id)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$id = intval($id);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE id='".$id."' LIMIT 1");
-		$book = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($book = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $book;
-		}
-		return $list;
-	}
+	
 
 	public function search($name, $author, $country, $gender, $yearmin, $yearmax, $editorial, $isbn, $pricemin, $pricemax)
 	{
@@ -104,9 +91,9 @@ class BookManager
 		$list = [];
 		$res = mysqli_query($this->db, $request);
 		var_dump(mysqli_error($this->db), $request);
-		while ($book = mysqli_fetch_object($res, "Book", [$this->db]))
+		while ($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
-			$list[] = $book;
+			$list[] = $books;
 		}
 		return $list;
 	}
