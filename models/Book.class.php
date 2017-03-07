@@ -13,7 +13,6 @@ class Book
 	private $price;
 
 	private $db;
-	private $books;
 
 	public function __construct($db)
 	{

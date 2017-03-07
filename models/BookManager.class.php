@@ -22,9 +22,9 @@ class BookManager
 	{
 		$list = [];
 		$res = mysqli_query($this->db, "SELECT * FROM books ORDER BY id LIMIT 15");
-		while ($books = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
+		while ($book = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
 		{
-			$list[] = $books;
+			$list[] = $book;
 		}
 		return $list;
 	}
@@ -35,17 +35,17 @@ class BookManager
 		$id = intval($id);
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE id='".$id."' LIMIT 1");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
+		$book = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
+		while($book = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
-			$list[] = $books;
+			$list[] = $book;
 		}
 		return $list;
 	}
 
 	public function search($name, $author, $country, $gender, $yearmin, $yearmax, $editorial, $isbn, $pricemin, $pricemax)
 	{
-		$request = "SELECT * FROM books ";
+		$request = "SELECT * FROM books WHERE 1 ";
 		if($name != "")
 		{
 			$name = mysqli_real_escape_string($this->db, $name);
@@ -54,42 +54,56 @@ class BookManager
 		if($author != "")
 		{
 			$author = mysqli_real_escape_string($this->db, $author);
-			$request .= " author LIKE '%".$author."%' ";
+			$request .= " AND author LIKE '%".$author."%' ";
 		}
 		if($country != "")
 		{
 			$country = mysqli_real_escape_string($this->db, $country);
-			$request .= " country LIKE '%".$country."%' ";
+			$request .= " AND country LIKE '%".$country."%' ";
 		}
 		if($gender != "")
 		{
 			$gender = mysqli_real_escape_string($this->db, $gender);
-			$request .= " gender LIKE '%".$gender."%' ";
+			$request .= " AND gender LIKE '%".$gender."%' ";
 		}
-		if($year != "")
+		if($yearmin != "")
 		{
-			$year = mysqli_real_escape_string($this->db, $year);
-			$request .= " year LIKE '%".$year."%' ";
+			$yearmin = intval($yearmin);
+			$request .= " AND YEAR (year) >= ' ".$yearmin."' ";
 		}
+
+		if($yearmax != "")
+		{
+			$yearmax = intval($yearmax);
+			$request .= " AND YEAR (year) <= '".$yearmax."' ";
+		}
+
 		if($editorial != "")
 		{
 			$editorial = mysqli_real_escape_string($this->db, $editorial);
-			$request .= " editorial LIKE '%".$editorial."%' ";
+			$request .= " AND editorial LIKE '%".$editorial."%' ";
 		}
 		if($isbn != "")
 		{
 			$isbn = mysqli_real_escape_string($this->db, $isbn);
-			$request .= " isbn LIKE '%".$isbn."%' ";
+			$request .= " AND isbn LIKE '%".$isbn."%' ";
 		}
-		if($price != "")
+		if($pricemin != "")
 		{
-			$price = floatval($this->db, $price);
-			$request .= " price LIKE '%".$price."%' ";
+			$pricemin = floatval($pricemin);
+			$request .= " AND price LIKE >= '".$pricemin."' ";
 		}
+			if($pricemax != "")
+		{
+			$pricemax = floatval($pricemax);
+			$request .= " AND price LIKE <= '".$pricemax."' ";
+		}
+
 
 		$request .= "  ORDER BY name DESC";
 		$list = [];
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%.$name.%' ORDER BY name DESC");
+		$res = mysqli_query($this->db, $request);
+		var_dump(mysqli_error($this->db), $request);
 		while ($book = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $book;
