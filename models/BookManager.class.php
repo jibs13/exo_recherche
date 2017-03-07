@@ -45,7 +45,7 @@ class BookManager
 		return $list;
 	}
 
-		public function findByName($name)
+		public function findName($name)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
@@ -60,7 +60,7 @@ class BookManager
 		return $list;
 	}
 
-		public function findByAuthor($author)
+		public function findAuthor($author)
 	{
 		$list = [];		
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
@@ -74,7 +74,7 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findByCountry($country)
+		public function findCountry($country)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
@@ -88,7 +88,7 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findByGender($gender)
+		public function findGender($gender)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
@@ -102,7 +102,7 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findByYear($year)
+		public function findYear($year)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
@@ -116,7 +116,7 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findByEditorial($editorial)
+		public function findEditorial($editorial)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
@@ -130,7 +130,7 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findByIsbn($isbn)
+		public function findIsbn($isbn)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
@@ -144,7 +144,7 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findByPrice($price)
+		public function findPrice($price)
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
