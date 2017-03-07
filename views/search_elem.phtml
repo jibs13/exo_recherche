@@ -4,9 +4,10 @@
 	<div class="descriptions">
 		<h2><?=$books->getName()?></h2>
 		<div class="clearfix"></div>
-		<h4><span>auteur</span> - Pays - Année</h4>
-		<h3>99 €</h3>
-		<p>description (editorial)</p>
+		<h4><span><?=$books->getAuthor()?></span><?=$books->getCountry()?> - <?=$books->getYear()?></h4>
+		<h3><?=$books->getIsbn()?></h3>
+		<p><?=$books->getCountry()?></p>
+		<p><?=$books->getPrice()?></p>
 	</div>
 	<div class="clearfix"></div>
 </div>

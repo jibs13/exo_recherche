@@ -44,13 +44,13 @@ class BookManager
 		return $list;
 	}
 
-	public function search($name, $author, $country, $gender, $year, $editorial, $isbn, $price)
+	public function search($name, $author, $country, $gender, $yearmin, $yearmax, $editorial, $isbn, $pricemin, $pricemax)
 	{
 		$request = "SELECT * FROM books ";
 		if($name != "")
 		{
 			$name = mysqli_real_escape_string($this->db, $name);
-			$request .= " name LIKE '%".$name."%' "; // $request = $request . " name LIKE '%".$name."%'";
+			$request .= "AND name LIKE '%".$name."%' "; // $request = $request . " name LIKE '%".$name."%'";
 		}
 		if($author != "")
 		{
