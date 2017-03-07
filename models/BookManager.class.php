@@ -19,6 +19,61 @@ class BookManager
 		}
 		return $list;
 	}
+
+	public function search($name, $author, $country, $gender, $year, $editorial, $isbn, $price )
+	{
+		$request = "SELECT * FROM books WHERE name LIKE '%".$name."%' ORDER BY name DESC";
+		if($name != "")
+		{
+			$name = mysqli_real_escape_string($this->db, $name);
+			$request .= " name LIKE '%".$name."%' "; // $request = $request . " name LIKE '%".$name."%'";
+		}
+		if($author != "")
+		{
+			$author = mysqli_real_escape_string($this->db, $author);
+			$request .= " author LIKE '%".$author."%' ";
+		}
+		if($country != "")
+		{
+			$country = mysqli_real_escape_string($this->db, $country);
+			$request .= " country LIKE '%".$country."%' ";
+		}
+		if($gender != "")
+		{
+			$gender = mysqli_real_escape_string($this->db, $gender);
+			$request .= " gender LIKE '%".$gender."%' ";
+		}
+		if($year != "")
+		{
+			$year = mysqli_real_escape_string($this->db, $year);
+			$request .= " year LIKE '%".$year."%' ";
+		}
+		if($editorial != "")
+		{
+			$editorial = mysqli_real_escape_string($this->db, $editorial);
+			$request .= " editorial LIKE '%".$editorial."%' ";
+		}
+		if($isbn != "")
+		{
+			$isbn = mysqli_real_escape_string($this->db, $isbn);
+			$request .= " isbn LIKE '%".$isbn."%' ";
+		}
+		if($price != "")
+		{
+			$price = floatval($this->db, $price);
+			$request .= " price LIKE '%".$price."%' ";
+		}
+
+		$request .= "  ORDER BY name DESC"
+		$list = [];
+		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%.$name.%' ORDER BY name DESC");
+		while ($book = mysqli_fetch_object($res, "Book", [$this->db]))
+		{
+			$list[] = $book;
+		}
+		return $list;
+	}
+	
 	// SELECT
 	public function findAll()
 	{
@@ -88,17 +143,14 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findGender($gender)
+		public function findGenders()
 	{
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
-		$gender = mysqli_real_escape_string($gender);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE gender='".$gender."' LIMIT 50");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
+		$res = mysqli_query($this->db, "SELECT gender FROM books GROUP BY gender ORDER BY gender");
+		while ($gender = mysqli_fetch_assoc($res))
 		{
-			$list[] = $books;
+			$list[] = $gender['gender'];
 		}
 		return $list;
 	}
