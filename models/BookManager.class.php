@@ -8,17 +8,17 @@ class BookManager
 	{
 		$this->db = $db;
 	}
-	public function search($search)
-	{
-		$list = [];
-		$recherche = mysqli_real_escape_string($this->db, $search);
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%".$recherche."%' OR author LIKE '%".$recherche."%' OR country LIKE '%".$recherche."%' OR gender LIKE '%".$recherche."%' OR year LIKE '%".$recherche."%' OR editorial LIKE '%".$recherche."%' OR isbn LIKE '%".$recherche."%' OR price LIKE '%".$recherche."%'");
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
+	// public function search($search)
+	// {
+	// 	$list = [];
+	// 	$recherche = mysqli_real_escape_string($this->db, $search);
+	// 	$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%".$recherche."%' OR author LIKE '%".$recherche."%' OR country LIKE '%".$recherche."%' OR gender LIKE '%".$recherche."%' OR year LIKE '%".$recherche."%' OR editorial LIKE '%".$recherche."%' OR isbn LIKE '%".$recherche."%' OR price LIKE '%".$recherche."%'");
+	// 	while($books = mysqli_fetch_object($res, "Book", [$this->db]))
+	// 	{
+	// 		$list[] = $books;
+	// 	}
+	// 	return $list;
+	// }
 
 	public function search($name, $author, $country, $gender, $year, $editorial, $isbn, $price)
 	{
@@ -64,7 +64,7 @@ class BookManager
 			$request .= " price LIKE '%".$price."%' ";
 		}
 
-		$request .= "  ORDER BY name DESC"
+		$request .= "  ORDER BY name DESC";
 		$list = [];
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%.$name.%' ORDER BY name DESC");
 		while ($book = mysqli_fetch_object($res, "Book", [$this->db]))

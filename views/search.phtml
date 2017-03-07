@@ -2,19 +2,19 @@
 
 <form method="GET">
 		<input type="hidden" value="search" name="page">
-		<input type="text" class="search-input" name="search_name" id="search_name" placeholder="Un titre" value="Un titre"/>
+		<input type="text" class="search-input" name="search_name" id="search_name" placeholder="Un titre" value="<?=htmlentities($search)?>"/>
 
-		<input type="text" class="search-input" name="search_country" id="search_country" placeholder="Un pays" value="pays"/>
+		<input type="text" class="search-input" name="search_country" id="search_country" placeholder="Un pays" value="<?=htmlentities($recherche)?>"/>
 
 		<label for="yearmin">Année de publication </label>
 		<input type="text" class="search-small" name="yearmin" id="yearmin" placeholder="année" /> à
 		<input type="text" class="search-small" name="yearmax" id="yearmax" placeholder="année"/>
 
-		<input type="text" class="search-input" name="search_isbn" id="search_isbn" placeholder="ISBN" value="ISBN" />
+		<input type="text" class="search-input" name="search_isbn" id="search_isbn" placeholder="ISBN" value="<?=htmlentities($recherche)?>" />
 
-		<input type="text" class="search-input" name="search_editorial" id="search_editorial" placeholder="Une maison d'édition" value="editeur"/>
+		<input type="text" class="search-input" name="search_editorial" id="search_editorial" placeholder="Une maison d'édition" value="<?=htmlentities($recherche)?>"/>
 
-		<select type="text" class="search-input" name="search_gender" id="search_gender" placeholder="Un genre" value="genre">
+		<select type="text" class="search-input" name="search_gender" id="search_gender" placeholder="Un genre" value="<?=htmlentities($recherche)?>">
 			<option value="0" selected>Choisissez un genre</option>
 					<option value="apologue">Apologue</option>
 					<option value="aventures">Aventures</option>
