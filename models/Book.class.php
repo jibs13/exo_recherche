@@ -1,5 +1,5 @@
 <?
-class Search
+class Book
 {
 	private $id;
 	private $name;
