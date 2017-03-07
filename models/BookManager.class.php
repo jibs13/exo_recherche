@@ -36,7 +36,7 @@ class BookManager
 		if($name != "")
 		{
 			$name = mysqli_real_escape_string($this->db, $name);
-			$request .= "AND name LIKE '%".$name."%' "; // $request = $request . " name LIKE '%".$name."%'";
+			$request .= " AND name LIKE '%".$name."%' "; // $request = $request . " name LIKE '%".$name."%'";
 		}
 		if($author != "")
 		{
@@ -56,13 +56,13 @@ class BookManager
 		if($yearmin != "")
 		{
 			$yearmin = intval($yearmin);
-			$request .= " AND YEAR (year) >= ' ".$yearmin."' ";
+			$request .= " AND YEAR(year) >= ' ".$yearmin."' ";
 		}
 
 		if($yearmax != "")
 		{
 			$yearmax = intval($yearmax);
-			$request .= " AND YEAR (year) <= '".$yearmax."' ";
+			$request .= " AND YEAR(year) <= '".$yearmax."' ";
 		}
 
 		if($editorial != "")
@@ -78,19 +78,18 @@ class BookManager
 		if($pricemin != "")
 		{
 			$pricemin = floatval($pricemin);
-			$request .= " AND price LIKE >= '".$pricemin."' ";
+			$request .= " AND price >= '".$pricemin."' ";
 		}
 			if($pricemax != "")
 		{
 			$pricemax = floatval($pricemax);
-			$request .= " AND price LIKE <= '".$pricemax."' ";
+			$request .= " AND price <= '".$pricemax."' ";
 		}
 
 
 		$request .= "  ORDER BY name DESC";
 		$list = [];
 		$res = mysqli_query($this->db, $request);
-		var_dump(mysqli_error($this->db), $request);
 		while ($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
