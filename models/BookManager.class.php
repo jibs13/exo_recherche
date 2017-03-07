@@ -1,4 +1,6 @@
 <?php
+var_dump($_POST);
+
 class BookManager
 {
 	private $db;
@@ -10,8 +12,8 @@ class BookManager
 	{
 		$list = [];
 		$recherche = mysqli_real_escape_string($this->db, $search);
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%".$recherche."%' OR author LIKE '%".$recherche."%' OR country LIKE "'%".$recherche."%' OR gender LIKE '%".$recherche."%' OR year LIKE '%".$recherche."%' OR editorial LIKE '%".$recherche."%' OR isbn LIKE '%".$recherche."%' OR price LIKE '%".$recherche."%');
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name LIKE '%".$recherche."%' OR author LIKE '%".$recherche."%' OR country LIKE '%".$recherche."%' OR gender LIKE '%".$recherche."%' OR year LIKE '%".$recherche."%' OR editorial LIKE '%".$recherche."%' OR isbn LIKE '%".$recherche."%' OR price LIKE '%".$recherche."%'");
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -22,7 +24,7 @@ class BookManager
 	{
 		$list = [];
 		$res = mysqli_query($this->db, "SELECT * FROM books ORDER BY id LIMIT 15");
-		while ($books = mysqli_fetch_object($res, "Search",[$this->db])) // $article = new article();
+		while ($books = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
 		{
 			$list[] = $books;
 		}
@@ -36,7 +38,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE id='".$id."' LIMIT 1");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -51,7 +53,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name='".$name."' LIMIT 10");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -66,7 +68,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE author='".$author."' LIMIT 20");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -80,7 +82,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE country='".$country."' LIMIT 50");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -94,7 +96,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE gender='".$gender."' LIMIT 50");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -108,7 +110,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE year='".$year."' LIMIT 50");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -122,7 +124,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE editorial='".$editorial."' LIMIT 50");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -136,7 +138,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE isbn='".$isbn."' LIMIT 1");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
@@ -150,7 +152,7 @@ class BookManager
 		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$res = mysqli_query($this->db, "SELECT * FROM books WHERE price='".$price."' LIMIT 50");
 		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Search", [$this->db]))
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
 		{
 			$list[] = $books;
 		}
