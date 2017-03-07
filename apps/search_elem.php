@@ -1,10 +1,10 @@
 <?php
-$count=0;
-while ($count<count($list))
+
+$manager = new BookManager($db);
+$list = $manager->findAll();
+foreach ($list AS $books) 
 {
-	$book = $list[$count];
 	require('views/search_elem.phtml');
-	$count++;
-	
 }
+
 ?>
