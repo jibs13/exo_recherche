@@ -19,10 +19,34 @@ class BookManager
 	// 	}
 	// 	return $list;
 	// }
+	public function findAll()
+	{
+		$list = [];
+		$res = mysqli_query($this->db, "SELECT * FROM books ORDER BY id LIMIT 15");
+		while ($books = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
+		{
+			$list[] = $books;
+		}
+		return $list;
+	}
+	public function findById($id)
+	{
+		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+		$list = [];
+		$id = intval($id);
+		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+		$res = mysqli_query($this->db, "SELECT * FROM books WHERE id='".$id."' LIMIT 1");
+		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
+		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
+		{
+			$list[] = $books;
+		}
+		return $list;
+	}
 
 	public function search($name, $author, $country, $gender, $year, $editorial, $isbn, $price)
 	{
-		$request = "SELECT * FROM books WHERE name LIKE '%".$name."%' ORDER BY name DESC";
+		$request = "SELECT * FROM books ";
 		if($name != "")
 		{
 			$name = mysqli_real_escape_string($this->db, $name);
@@ -74,78 +98,8 @@ class BookManager
 		return $list;
 	}
 	
-	// SELECT
-	public function findAll()
+	public function findGenders()
 	{
-		$list = [];
-		$res = mysqli_query($this->db, "SELECT * FROM books ORDER BY id LIMIT 15");
-		while ($books = mysqli_fetch_object($res, "Book", [$this->db])) // $article = new article();
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-	public function findById($id)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$id = intval($id);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE id='".$id."' LIMIT 1");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-
-		public function findName($name)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$name = mysqli_real_escape_string($this->db, $name);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE name='".$name."' LIMIT 10");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-
-		public function findAuthor($author)
-	{
-		$list = [];		
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$author= mysqli_real_escape_string($author);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE author='".$author."' LIMIT 20");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-		public function findCountry($country)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$country = mysqli_real_escape_string($country);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE country='".$country."' LIMIT 50");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-		public function findGenders()
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
 		$list = [];
 		$res = mysqli_query($this->db, "SELECT gender FROM books GROUP BY gender ORDER BY gender");
 		while ($gender = mysqli_fetch_assoc($res))
@@ -154,62 +108,9 @@ class BookManager
 		}
 		return $list;
 	}
-		public function findYear($year)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$year = intval($year);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE year='".$year."' LIMIT 50");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-		public function findEditorial($editorial)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$editorial = mysqli_real_escape_string($editorial);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE editorial='".$editorial."' LIMIT 50");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-		public function findIsbn($isbn)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$isbn = mysqli_real_escape_string($isbn);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE isbn='".$isbn."' LIMIT 1");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
-		public function findPrice($price)
-	{
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$list = [];
-		$price = intval($price);
-		// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-		$res = mysqli_query($this->db, "SELECT * FROM books WHERE price='".$price."' LIMIT 50");
-		$books = mysqli_fetch_object($res, "Books",[$this->db]); // $article = new article();
-		while($books = mysqli_fetch_object($res, "Book", [$this->db]))
-		{
-			$list[] = $books;
-		}
-		return $list;
-	}
+	// SELECT
+
+		
 	// on en a besoin pour la partie login du site internet
 	
 	// UPDATE

@@ -1,5 +1,5 @@
 <?php
 $manager = new BookManager($db);
-$list = $manager->findAll();
+$genders= $manager->findGenders();
 require('views/search.phtml');
 ?>

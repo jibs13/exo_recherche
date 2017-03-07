@@ -1,53 +1,20 @@
 <div class="search-form">
-
 <form method="GET">
-		<input type="hidden" value="search" name="page">
-		<input type="text" class="search-input" name="search_name" id="search_name" placeholder="Un titre" value="<?=htmlentities($search)?>"/>
-
-		<input type="text" class="search-input" name="search_country" id="search_country" placeholder="Un pays" value="<?=htmlentities($recherche)?>"/>
-
+		<input type="text" class="search-input" name="search_name" id="search_name" placeholder="Un titre" value=""/>
+		<input type="text" class="search-input" name="search_country" id="search_country" placeholder="Un pays" value=""/>
 		<label for="yearmin">Année de publication </label>
 		<input type="text" class="search-small" name="yearmin" id="yearmin" placeholder="année" /> à
 		<input type="text" class="search-small" name="yearmax" id="yearmax" placeholder="année"/>
-
-		<input type="text" class="search-input" name="search_isbn" id="search_isbn" placeholder="ISBN" value="<?=htmlentities($recherche)?>" />
-
-		<input type="text" class="search-input" name="search_editorial" id="search_editorial" placeholder="Une maison d'édition" value="<?=htmlentities($recherche)?>"/>
-
-		<select type="text" class="search-input" name="search_gender" id="search_gender" placeholder="Un genre" value="<?=htmlentities($recherche)?>">
-			<option value="0" selected>Choisissez un genre</option>
-					<option value="apologue">Apologue</option>
-					<option value="aventures">Aventures</option>
-					<option value="bd">Bande-dessinée</option>
-					<option value="biographie">Biographie</option>
-					<option value="conte">Conte</option>
-					<option value="epopee">Epopée</option>
-					<option value="essai">Essai</option>
-					<option value="fantastique">Fantastique</option>
-					<option value="fantasy">Fantasy</option>
-					<option value="horreur">Horreur</option>
-					<option value="lettre">Lettre</option>
-					<option value="nouvelle">nouvelle</option>
-					<option value="pamphlet">Pamphlet</option>
-					<option value="parodie">Parodie</option>
-					<option value="policier">Policier</option>
-					<option value="portrait">Portrait</option>
-					<option value="roman">Roman</option>
-					<option value="science-fiction">Science-fiction</option>
-					<option value="sermon">Sermon</option>
-					<option value="temoignage">Témoignage</option>
-					<option value="theatre">Théâtre</option>
-
-					<!-- 
+		<input type="text" class="search-input" name="search_isbn" id="search_isbn" placeholder="ISBN" value="" />
+		<input type="text" class="search-input" name="search_editorial" id="search_editorial" placeholder="Une maison d'édition" value=""/>
+		<select class="search-input" name="search_gender" id="search_gender" placeholder="Un genre" value="">
+			<option value="" selected>Choisissez un genre</option>
 						<?php foreach ($genders AS $gender) : ?>
 							<option><?=$gender?></option>
-						<?php endforeach; ?> -->
+						<?php endforeach; ?>
 		</select>
-
 		<label for="pricemin">Prix </label><input type="text" class="search-small" placeholder="min" name="pricemin" id="pricemax"/>
 		<input type="text" class="search-small" placeholder="max" name="pricemax" id="pricemax"/>
-
 		<input type="submit" class="search-button" value="Rechercher">
 	</form>
-
 </div>
