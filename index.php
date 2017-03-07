@@ -31,5 +31,9 @@ function __autoload($classname)
 // 	$traitement = $access_traitement[$_GET['page']];
 // 	require('apps/traitement_'.$traitement.'.php');
 // }
-require('apps/skel.php');
+if (isset($_GET['ajax']))
+	require('apps/'.$page.'.php');
+else
+	require('apps/skel.php');
+
 ?>
